@@ -52,7 +52,8 @@
   
   startButton.addEventListener('click', () => {
    startButton.hidden = true;
-   fetchQuizData(1);
+   fetchQuizData(1)
+   .catch(error => titleElement.textContent = error(error));
   });
   
   const fetchQuizData = async (index) => {
@@ -68,8 +69,9 @@
     const quizInstance = new Quiz(quizData);
   
     setNextQuiz(quizInstance, index);
+
   } catch (error) {
-    console.error(error);
+    throw error;
   }
   };
   

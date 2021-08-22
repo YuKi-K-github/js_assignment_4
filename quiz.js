@@ -53,7 +53,6 @@
   startButton.addEventListener('click', () => {
    startButton.hidden = true;
    fetchQuizData(1)
-   .catch(error => titleElement.textContent = error(error));
   });
   
   const fetchQuizData = async (index) => {
@@ -62,16 +61,13 @@
 
    try {
     const response = await fetch(API_URL);
-   if (!response.ok) {
-      throw new Error('例外が発生！');
-    }
     const quizData = await response.json();
     const quizInstance = new Quiz(quizData);
   
     setNextQuiz(quizInstance, index);
 
   } catch (error) {
-    throw error;
+    console.log(error);
   }
   };
   
